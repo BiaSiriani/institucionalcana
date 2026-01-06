@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BrocaDetect - Captura Inteligente de Broca da Cana</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #2d5016;
+            --secondary-color: #4a7c2c;
+            --accent-color: #d4a574;
+            --light-bg: #f5f9f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent-color) !important;
+        }
+
+        .nav-link {
+            color: #fff !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-color) !important;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            color: var(--primary-color);
+            font-weight: 600;
+            padding: 12px 40px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: white;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 80px 0;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+
+        .feature-card:hover {
+            border-color: var(--secondary-color);
+            box-shadow: 0 10px 30px rgba(45, 80, 22, 0.1);
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* Technology Section */
+        .tech-section {
+            background-color: var(--light-bg);
+            padding: 80px 0;
+        }
+
+        .tech-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .tech-badge {
+            display: inline-block;
+            background-color: white;
+            border: 2px solid var(--secondary-color);
+            color: var(--primary-color);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        .tech-badge:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 80px 0;
+        }
+
+        .benefit-item {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            flex-shrink: 0;
+        }
+
+        .benefit-item h5 {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 80px;
+        }
+
+        footer h5 {
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+            padding-top: 20px;
+            text-align: center;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .cta-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-bug"></i> BrocaDetect</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#about">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#features">Recursos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#technology">Tecnologia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contato</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <h1>BrocaDetect</h1>
+            <p>Detecção inteligente de broca da cana para maximizar sua produção</p>
+            <p style="font-size: 1rem; opacity: 0.85;">Utilize tecnologia de visão computacional para identificar e combater a broca da cana de forma eficiente</p>
+            <a href="#about" class="btn btn-primary-custom">Saiba Mais</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <h2 class="section-title">Sobre o Projeto</h2>
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 10px; padding: 40px; color: white; text-align: center;">
+                        <i class="bi bi-bug-fill" style="font-size: 4rem; margin-bottom: 20px; display: block;"></i>
+                        <h3>Um Problema Real</h3>
+                        <p>A broca da cana (Eldana saccharina) é uma das pragas mais destrutivas para a indústria canavieira, causando perdas significativas de produção.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h3 style="color: var(--primary-color); font-weight: 600; margin-bottom: 20px;">Nossa Solução</h3>
+                    <p>O BrocaDetect utiliza inteligência artificial e visão computacional para detectar automaticamente a presença de broca da cana em plantações.</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li class="mb-3"><i class="bi bi-check-circle-fill" style="color: var(--secondary-color); margin-right: 10px;"></i> Detecção rápida e precisa</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill" style="color: var(--secondary-color); margin-right: 10px;"></i> Reduz custos operacionais</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill" style="color: var(--secondary-color); margin-right: 10px;"></i> Aumenta a produtividade</li>
+                        <li class="mb-3"><i class="bi bi-check-circle-fill" style="color: var(--secondary-color); margin-right: 10px;"></i> Fácil integração</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title">Recursos Principais</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <i class="bi bi-camera feature-icon"></i>
+                        <h4>Captura de Imagens</h4>
+                        <p>Sistema integrado de captura de imagens de alta resolução para análise precisa das plantas.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <i class="bi bi-lightning-fill feature-icon"></i>
+                        <h4>Detecção em Tempo Real</h4>
+                        <p>Processamento rápido com algoritmos de IA para identificação instantânea de pragas.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <i class="bi bi-graph-up feature-icon"></i>
+                        <h4>Análise de Dados</h4>
+                        <p>Relatórios detalhados com estatísticas e tendências para melhor gestão da plantação.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <i class="bi bi-map feature-icon"></i>
+                        <h4>Mapeamento Geoespacial</h4>
+                        <p>Visualização de áreas afetadas através de mapas interativos com localização GPS.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <i class="bi bi-shield-check feature-icon"></i>
+                        <h4>Precisão Confiável</h4>
+                        <p>Modelos de machine learning treinados com milhares de imagens de plantas de cana.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="feature-card">
+                        <i class="bi bi-phone feature-icon"></i>
+                        <h4>Interface Intuitiva</h4>
+                        <p>Aplicação mobile e web fácil de usar, acessível para qualquer agente agrícola.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section class="tech-section" id="technology">
+        <div class="container">
+            <h2 class="section-title">Tecnologias Utilizadas</h2>
+            <div class="row text-center">
+                <div class="col-lg-8 mx-auto">
+                    <div class="tech-item">
+                        <p style="margin-bottom: 20px; color: var(--primary-color); font-weight: 600; font-size: 1.1rem;">Stack Tecnológico</p>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                            <span class="tech-badge">Python</span>
+                            <span class="tech-badge">TensorFlow</span>
+                            <span class="tech-badge">OpenCV</span>
+                            <span class="tech-badge">Machine Learning</span>
+                            <span class="tech-badge">React</span>
+                            <span class="tech-badge">Node.js</span>
+                            <span class="tech-badge">PostgreSQL</span>
+                            <span class="tech-badge">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title">Benefícios para Sua Lavoura</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="benefit-item">
+                        <i class="bi bi-percent benefit-icon"></i>
+                        <div>
+                            <h5>Redução de Perdas</h5>
+                            <p>Diminua significativamente as perdas causadas pela broca através de detecção precoce e intervenção rápida.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="bi bi-cash-coin benefit-icon"></i>
+                        <div>
+                            <h5>Economia de Custos</h5>
+                            <p>Otimize o uso de defensivos e reduza gastos com aplicações desnecessárias em áreas não afetadas.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="bi bi-hourglass-split benefit-icon"></i>
+                        <div>
+                            <h5>Ganho de Tempo</h5>
+                            <p>Automatize o monitoramento de grandes áreas em uma fração do tempo que levaria manualmente.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="benefit-item">
+                        <i class="bi bi-plus-circle benefit-icon"></i>
+                        <div>
+                            <h5>Aumento de Produtividade</h5>
+                            <p>Maximize sua produção através de gestão mais eficiente das pragas e melhor alocação de recursos.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="bi bi-info-circle benefit-icon"></i>
+                        <div>
+                            <h5>Dados e Inteligência</h5>
+                            <p>Acesso a dados detalhados e insights para tomar decisões mais informadas sobre sua plantação.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="bi bi-cloud-check benefit-icon"></i>
+                        <div>
+                            <h5>Suporte Contínuo</h5>
+                            <p>Atualizações constantes do modelo de IA baseadas em novas detecções e feedback contínuo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Pronto para Revolucionar Sua Produção?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px;">Entre em contato conosco para saber mais sobre como o BrocaDetect pode ajudar sua lavoura.</p>
+            <a href="mailto:contato@brocadetect.com" class="btn btn-light" style="font-weight: 600; padding: 12px 40px; border-radius: 50px; margin-right: 10px;">
+                <i class="bi bi-envelope"></i> Envie um Email
+            </a>
+            <a href="https://wa.me/5511999999999" target="_blank" class="btn btn-light" style="font-weight: 600; padding: 12px 40px; border-radius: 50px;">
+                <i class="bi bi-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="bi bi-bug"></i> BrocaDetect</h5>
+                    <p>Soluções inteligentes para detecção de pragas na agricultura.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Links Rápidos</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="#about">Sobre</a></li>
+                        <li><a href="#features">Recursos</a></li>
+                        <li><a href="#technology">Tecnologia</a></li>
+                        <li><a href="#contact">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Redes Sociais</h5>
+                    <ul style="list-style: none; padding: 0;">
+                        <li><a href="#"><i class="bi bi-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="bi bi-github"></i> GitHub</a></li>
+                        <li><a href="#"><i class="bi bi-twitter"></i> Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BrocaDetect. Todos os direitos reservados. | Desenvolvido com <i class="bi bi-heart-fill" style="color: var(--accent-color);"></i> para a agricultura</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animação ao carregar a página
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.feature-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.opacity = '0';
+                    card.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                }, index * 100);
+            });
+        });
+
+        // Keyframe animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
